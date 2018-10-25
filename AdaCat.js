@@ -5,6 +5,7 @@ class AdaCat {
     this.hunger = 5
     this.isSleeping = false
     this.size = 30
+    this.tiredness = 0;
   }
 
   setHunger(newHunger) {
@@ -15,6 +16,16 @@ class AdaCat {
       newHunger = 10
     }
     this.hunger = newHunger
+  }
+
+  setTiredness(newTiredness) {
+    if (newTiredness < 0) {
+      newTiredness = 0;
+    }
+    if (newTiredness > 15) {
+      newTiredness = 15;
+    }
+    this.tiredness = newTiredness;
   }
 
   getDescription() {
@@ -38,16 +49,19 @@ class AdaCat {
 
   feed() {
     var hunger = this.hunger - 1
+    var tiredness = this.tiredness + 1;
 
     if (hunger < 3) {
       this.size = this.size + 1
     }
 
-    this.setHunger(hunger)
+    this.setHunger(hunger);
+    this.setTiredness(tiredness);
   }
 
   nap() {
     this.isSleeping = true
+    this.setTiredness(0);
   }
 
   wakeUp() {
@@ -56,10 +70,14 @@ class AdaCat {
 
   play() {
     var hunger = this.hunger + 3
+    var tiredness = this.tiredness + 3;
+
     if (hunger > 7) {
       this.size = this.size - 1
     }
+
     this.setHunger(hunger)
+    this.setTiredness(tiredness);
   }
 
   getHealth() {
